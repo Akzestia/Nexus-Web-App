@@ -1,0 +1,19 @@
+﻿*{
+    margin: 0;
+}
+
+.nav-bar-x {
+    width: 100%;
+    min-width: 30%;
+    background-color: rgb(26,26,26);
+    height: 5.6vh;
+    user-select: none;
+}
+
+.nav-bar-x img{
+    position: absolute;
+    border-radius: 50%;
+    height: 4vh;
+    margin-top: 0.8vh;
+    right: 1rem;
+}

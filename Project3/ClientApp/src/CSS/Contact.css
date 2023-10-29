@@ -1,0 +1,35 @@
+
+
+
+.contact-x-main-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    position: relative;
+    width: 16rem;
+    background-color: rgb(26,26,26);
+    height: 5rem;
+    color: #9700d3;
+}
+.contact-x-main-container:hover{
+    color: aquamarine;
+}
+
+.contact-avatar-x {
+    user-select: none;
+    width: 3.5rem;
+    height: 3.5rem;
+    margin-top: auto;
+    margin-bottom: auto;
+    border-radius: 50%;
+    margin-left: 1rem;
+}
+
+.contact-info-x{
+    display: flex;
+    flex-direction: column;
+    height: 5rem;
+    margin-left: 1rem;
+    justify-content: center;
+
+}

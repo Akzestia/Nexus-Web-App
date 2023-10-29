@@ -1,0 +1,198 @@
+﻿*{
+    margin: 0;
+}
+
+
+body{
+    background-color: black;
+    height: 100vh;
+    opacity: 1;
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+}
+
+html{
+    background-color: rgb(25,25,25);
+}
+
+.bg-video-login {
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    margin-left: 0rem;
+    border-radius: 0.88rem;
+    z-index: 1;
+    opacity: 1;
+    object-fit: fill;
+    z-index: -1;
+    user-select: none;
+    opacity: 0.17;
+    top: 0;
+}
+
+
+.login-div-x{
+    position: relative;
+    opacity: 1;
+    user-select: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 20rem;
+    height: calc(auto);
+    background-color: aquamarine;
+    border-radius: 0.66rem;
+    padding: 2rem;
+    text-align: center;
+    margin-top: 12%;
+    margin: 12% auto 0 auto;
+    border: 1px solid;
+    border-color: #9700d3;
+    color: #9700d3;
+    background-color: rgb(26,26,26);
+    z-index: 2;
+}
+
+input[type="password"] {
+    position: relative;
+    color: #9700d3;
+    background-color: transparent;
+    outline: none;
+    border-left: none;
+    border-top: none;
+    border-right: none;
+    z-index: 1;
+    width: 100%;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    margin-left: 1rem;
+    transition: all .15s linear;
+}
+
+input[type="password"]::placeholder {
+    position: absolute;
+    z-index: 2;
+    transition: all .05s linear;
+}
+
+.LogoImg{
+    width: 6rem;
+    height: 6rem;
+    margin: 0 auto 1.7rem auto;
+    border-radius: 50%;
+}
+
+svg:hover {
+    color: aqua;
+    fill: aqua;
+}
+
+
+input[type="password"]:hover::placeholder {
+    color: aqua;
+}
+
+input[type="password"]:hover {
+    border-color: aqua;
+    color: aqua;
+}
+
+input[type="password"]:focus::placeholder {
+    color: aqua;
+}
+
+input[type="password"]:focus {
+    border-color: aqua;
+    color: aqua;
+}
+
+.div-x-hor{
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    width: 100%;
+}
+
+svg {
+    margin-left: -2.2rem;
+    position: relative;
+    margin-top: 1.5rem;
+    z-index: 2;
+    fill: #9700d3;
+    transition: all .15s linear;
+}
+
+i{
+    width: 2rem;
+    height: 2rem;
+    fill: red;
+}
+
+.div-x-ver{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+}
+
+input[type="text"] {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    margin-left: 1rem;
+    color: #9700d3;
+    background-color: transparent;
+    outline: none;
+    border-left: none;
+    border-top: none;
+    border-right: none;
+    width: 100%;
+    transition: all .35s linear;
+    overflow: visible;
+    position: relative;
+    z-index: 1;
+}
+
+input[type="text"]::placeholder{
+    position: absolute;
+    z-index: 2;
+    transition: all .05s linear;
+}
+
+
+input[type="text"]:hover::placeholder{
+    color: aqua;
+    
+}
+input[type="text"]:hover{
+    border-color: aqua;
+    color: aqua;
+}
+
+input[type="text"]:focus::placeholder{
+    color: aqua;
+    
+}
+input[type="text"]:focus{
+    border-color: aqua;
+    color: aqua;
+}
+
+.submit-btn {
+    user-select: none;
+    width: 19rem;
+    height: 2.5rem;
+    border-radius: 0.78rem;
+    position: relative;
+    background-color: rgb(26,26,26);
+    border: 1px solid #9700d3;
+    color: #9700d3;
+    outline: none;
+    margin-left: 0.86rem;
+    transition: all .15s linear;
+}
+
+.submit-btn:hover{
+    color: aqua;
+    border: 1px solid aqua;
+}

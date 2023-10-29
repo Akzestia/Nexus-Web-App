@@ -1,0 +1,270 @@
+﻿body {
+  background-color: black;
+  display: block;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  background-color: black;
+}
+
+.div-hor-x {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.div-main-x {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+}
+.div-ver-x {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.contacts-div-x {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 82.4vh;
+    background-color: rgb(25,25,25);
+    border-radius: 0.88rem;
+    width: 16rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    border: 3px solid #9700d3;
+    box-sizing: border-box;
+    /*background-color: rgb(26, 26, 26);*/
+}
+
+.contact-list-x {
+    user-select: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 67.8vh;
+    background-color: transparent;
+    overflow-x: scroll;
+    border-radius: 0.88rem 0.88rem 0 0;
+    padding-left: 1px;
+    width: calc(16rem-3px);
+}
+.contact-list-x::-webkit-scrollbar {
+    display: none;
+}
+
+
+.user-interface-x {
+    position: absolute;
+    margin-top: 84vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    height: 8vh;
+    background-color: rgb(50,50,50);
+    border-radius: 0.88rem;
+    width: 16rem;
+}
+
+#x-x-x-x {
+    height: 5rem;
+    width: 10rem;
+    background-color: white;
+}
+
+.chat-area-div-x {
+    height: 82.4vh;
+    width: calc(100% - 19rem);
+    overflow-y: scroll;
+    background-color: rgb(36, 36, 36);
+    border-radius: 0.88rem;
+    opacity: 0.9;
+}
+[title] {
+    pointer-events: none;
+}
+
+#background-video {
+    position: absolute;
+    height: 82.4vh;
+    width: calc(100% - 19rem);
+    margin-left: 0rem;
+    border-radius: 0.88rem;
+    z-index: 1;
+    opacity: 0.8;
+    object-fit: fill;
+    z-index: -1;
+    user-select: none;
+}
+
+.chat-ixput-div-x {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    height: 3.5rem;
+    border-radius: 0.56rem;
+    border: 1px solid;
+    width: calc(100% - 19rem);
+    margin-left: 2.5%;
+    border-color: #9700d3;
+    background-color: transparent;
+    margin-top: 85.4vh;
+    margin-left: 18rem;
+}
+
+.chat-ixput-div-x input {
+  position: relative;
+  justify-self: flex-start;
+  width: 75%;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  min-height: 3.5rem;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  color: red;
+  overflow: scroll;
+  margin-top: 0vh;
+}
+
+.chat-ixput-div-x input::selection {
+  background-color: red;
+  color: rgb(26, 26, 26);
+}
+
+
+::-webkit-scrollbar {
+  width: 0.8rem;
+  height: 0rem;
+  background-color: transparent;
+  border-radius: 1.66rem;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent; 
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 1.66rem;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #9700d3; 
+  max-height: 4rem;
+  opacity: 0;
+  border-radius: 1.66rem;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+  opacity: 1;
+}
+
+
+.send-x-btn{
+  position: relative;
+  width: 2rem;
+  height: 2rem;
+  background-color: transparent;
+  border: 1px solid #9700d3;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  outline:#9700d3;
+  border-radius: 50%;
+  margin-top: -2.8rem;
+  z-index: 3;
+  margin-left: 97%;
+}
+
+.send-x-btn svg{
+  fill: #9700d3;
+  width: 2rem;
+  height: 2rem;
+  margin-left: -0.3rem;
+  margin-top: 0.1rem;
+}
+
+.add-contact-btn {
+    user-select: none;
+    width: 15rem;
+    height: 3.5rem;
+    border-radius: 0.78rem;
+    position: absolute;
+    background-color: rgb(26,26,26);
+    border: 1px solid #9700d3;
+    color: #9700d3;
+    outline: none;
+    margin-left: 0.3rem;
+    margin-top: 69.8vh;
+}
+
+.add-contact-btn:hover{
+     border: 1px solid aquamarine;
+     color: aquamarine;
+}
+
+.join-server-btn {
+    user-select: none;
+    width: 15rem;
+    height: 3.5rem;
+    border-radius: 0.78rem;
+    position: absolute;
+    background-color: rgb(26,26,26);
+    border: 1px solid #9700d3;
+    color: #9700d3;
+    outline: none;
+    margin-left: 0.3rem;
+    margin-top: 75.8vh;
+}
+
+.join-server-btn:hover {
+    border: 1px solid aquamarine;
+    color: aquamarine;
+}
+
+
+.users-interface-img-x {
+    user-select: none;
+    width: 3.5rem;
+    height: 3.5rem;
+    margin-top: auto;
+    margin-bottom: auto;
+    border-radius: 50%;
+    margin-left: 1rem;
+}
+
+.user-interface-username-x{
+    position: relative;
+    line-height: 8vh;
+    margin-left: 1rem;
+    color: #9700d3;
+    font-size: 1.4rem;
+    user-select: none;
+}
+
+
+#settings-svg-btn {
+    fill: #9700d3;
+    width: 2.5rem;
+    height: 2.5rem;
+    position: relative;
+    margin-left: 3.6rem;
+    margin-top: auto;
+    margin-bottom: auto;
+    transition: all 0.35s linear;
+}
+
+#settings-svg-btn:hover{
+    fill: aquamarine;
+    transform: rotate(180deg);
+}

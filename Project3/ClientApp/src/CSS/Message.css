@@ -1,0 +1,76 @@
+
+
+.msg-x-main-container-sender{
+    position: relative;
+    display: flex;
+    width: auto;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 100%;
+    height: auto;
+    border-radius: 1.6rem;
+    background-color: transparent;
+    margin-left: -1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.msg-x-main-container-receiver{
+    position: relative;
+    display: flex;
+    width: auto;
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+    width: 100%;
+    height: auto;
+    border-radius: 1.6rem;
+    background-color: transparent;
+    margin-left: -2rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.message-text-section-x {
+    color: #9700d3;
+    position: relative;
+    min-width: 8rem;
+    max-width: 37rem;
+    width: auto;
+    height: auto;
+    overflow-wrap: break-word;
+    background-color: rgb(36, 36, 36);
+    padding: 1rem;
+    border: 1px solid #9700d3;
+    border-radius: 1rem;
+    margin-left: 1rem;
+    font-family: sans-serif;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+.message-text-section-x p{
+    padding-bottom: 1rem;
+}
+
+.img-avatar-x-sender{
+    border-radius: 50%;
+    height: 2rem;
+    width: 2rem;
+    align-self: center;
+    margin-left: 0rem;
+    margin-bottom: 0.3rem;
+}
+
+.x-user-name{
+    position: absolute;
+    left: 5rem;
+    top: 1.5rem;
+    left: 3.7rem;
+    color: aqua;
+}
+
+.date-content-section-x{
+    position: absolute;
+    bottom: 0.42rem;
+    right: 0.88rem;
+    color: aqua;
+}
