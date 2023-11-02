@@ -28,6 +28,10 @@ root.render(
 
             </Route>
 
+            <Route path='/nexus/:id' element={<HomeIsAuth></HomeIsAuth>} >
+
+            </Route>
+
             <Route path='/sign-up' element={<SignupWithNavigate></SignupWithNavigate>}>
 
             </Route>

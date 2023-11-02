@@ -6,7 +6,8 @@ import { Layout } from "./Layout";
 import { Message, MessageWithData } from "./Message";
 import { FaBeer } from "react-icons/fa";
 import { encode, decode } from "uint8-to-base64";
-import { Contact } from "./Contact";
+import { ContactWithData } from "./Contact";
+import { compileSchema } from "ajv/dist/compile";
 
 class Home extends Component {
   constructor(props) {
@@ -16,51 +17,33 @@ class Home extends Component {
       connectionId: "",
       messages: [],
       contacts: [],
-      activeReceiverId: '',
-      data: '',
+      activeReceiverId: 10,
+      CurrentUserId: -1,
+      data: "",
     };
-    this.state.connection.on(
-      "broadcastMessage",
-      async (UserId, message) => {
-        console.log(message);
+    this.state.connection.on("broadcastMessage", async (senderId, receiverId, message) => {
 
-          const options = {
-              method: 'GET',
-              headers: {
-                  'Content-Type': 'application/json',
-              }
-          };
+      var array = this.state.messages;
 
-          const response = await fetch("auth/GetCurrentUserId", options);
-
-          const data = await response.json();
-        
-
-        console.log("ID = " + data);
-
-        console.log(this.state.connection.connection.connectionId);
-        // document.getElementById('x-img').src = list;
-        var array = this.state.messages;
-        array.push(
-          new Object({
-            id: array.length,
-            textcontent: message,
-            Date: new Date().getHours() + ":" + new Date().getMinutes(),
-            SenderId: UserId,
-            ReceiverId: data.Id,
-            CurrentUserId: data.Id,
-          })
-        );
-        this.setState({ messages: array });
-        console.log(this.state.messages);
+      const options = {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
-    );
+
+      const response = await fetch(`message/GetUserMessages/${this.state.CurrentUserId}/${this.state.activeReceiverId}`, options);
+      const data = await response.json();
+      array = data;
+      this.setState({ messages: array });
+    });
     this.state.connection.on("Echo", async (name, message) => {
       /*window.location = '/login';*/
       console.log(this.state.connection.connection.connectionId);
     });
 
     this.sendMessage = this.sendMessage.bind(this);
+    this.componentDidMount = this.componentDidMount.bind(this);
   }
 
   handleMessage = (event) => {
@@ -68,36 +51,89 @@ class Home extends Component {
   };
 
   timer;
-    componentDidMount = async () => {
-        document.body.style.backgroundColor = "rgb(26,26,26)";
+  componentDidMount = async () => {
 
-        clearInterval(this.timer);
-
-        const options = {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        };
-
-        const response = await fetch("auth/GetCurrentUserId", options);
-
-        const data = await response.json();
-
-        document.getElementById('nav-img-x').src = "data:image/png;base64," + data.userAvatar;
-        document.querySelector('.users-interface-img-x').src = "data:image/png;base64," + data.userAvatar;
-        document.querySelector('.user-interface-username-x').innerHTML = data.userName;
-
-    this.timer = setInterval(() => {
-      try{
+    clearInterval(this.timer);
+    this.timer = setInterval(async () => {
+      try {
         if (document.getElementById("background-video").paused) {
-          document.getElementById("background-video").play();
+          await document.getElementById("background-video").play();
         } else {
         }
+      } catch {
+        clearInterval(this.timer);
       }
-      catch{clearInterval(this.timer);}
-     
-    }, 1000);
+    }, 100);
+
+    const options = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    const response = await fetch("auth/GetCurrentUserId", options);
+
+    const data = await response.json();
+
+    var x = this.state.CurrentUserId;
+    x = data.id;
+    this.setState({CurrentUserId: data.id});
+
+    document.getElementById("nav-img-x").src =
+      "data:image/png;base64," + data.userAvatar;
+    document.querySelector(".users-interface-img-x").src =
+      "data:image/png;base64," + data.userAvatar;
+    document.querySelector(".user-interface-username-x").innerHTML =
+      data.userName;
+
+      var array = this.state.messages;
+
+      const options2 = {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+
+      console.log("CURRID " + this.state.CurrentUserId);
+      // const responseu = await fetch(`message/GetUserMessages/${x}`, options2);
+      // const datau = await responseu.json();
+      // console.log(datau);
+      // array = datau;
+      // this.setState({ messages: array });
+      // console.log("DATA");
+      // console.log(this.state.messages);
+
+    const getContactsOptions = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    const responseContacts = await fetch(
+      "auth/GetUserContacts",
+      getContactsOptions
+    );
+
+    console.log(responseContacts);
+    const dataContacts = await responseContacts.json();
+
+    var xux = [];
+    xux = dataContacts;
+
+    // dataContacts.forEach((element) => {
+    //   xux.push(element);
+    // });
+
+    this.state.contacts = xux;
+    console.log('STATE');
+    console.log(this.state.contacts);
+
+    document.body.style.backgroundColor = "rgb(26,26,26)";
+
+    
     window.oncontextmenu = () => {
       return false;
     };
@@ -132,29 +168,46 @@ class Home extends Component {
         console.log("Id: " + this.state.connectionId);
       })
       .catch((error) => console.error(error.message));
+  
   };
 
   componentWillUnmount = () => clearInterval(this.timer);
 
   sendMessage = async () => {
-
-
     if (document.getElementById("i-s").value != "") {
-
-      const options = {
-        method: 'GET',
+      var options = {
+        method: "POST",
         headers: {
-            'Content-Type': 'application/json',
-        }
-    };
+          "Content-Type": "application/json",
+        },
+        body: {
+          SenderId: "",
+          ReceiverId: "",
+          MessageText: "",
+          BlobContent: "",
+          TimeSent: "",
+        },
+      };
 
-    const response = await fetch("auth/GetCurrentUserId", options);
+      // let responsex = await fetch('message/CreateMessage');
 
-    const data = await response.json();
+      options = {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+
+      // const response = await fetch("auth/GetCurrentUserId", options);
+
+      // const data = await response.json();
 
       this.state.connection.send(
         "broadcastMessage",
-        document.getElementById("i-s").value, data.id
+        document.getElementById("i-s").value,
+        this.state.CurrentUserId,
+        this.state.activeReceiverId,
+        // data.id
       );
     }
   };
@@ -171,14 +224,48 @@ class Home extends Component {
     };
   }
 
+  setReceiverId = async (id) =>{
+    this.state.activeReceiverId = id;
+    console.log('start');
+    console.log("CHNAGED" + " " + this.state.activeReceiverId);
+    var array = this.state.messages;
+
+      const options = {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+
+      const response = await fetch(`message/GetUserMessages/${this.state.CurrentUserId}/${this.state.activeReceiverId}`, options);
+      const data = await response.json();
+      array = data;
+      this.setState({ messages: array });
+
+      console.log('end');
+  }
+
   render() {
-    const contacts = this.state.contacts.map((val) => {});
     return (
       <>
+
         <div className="div-main-x">
           <div className="contacts-div-x">
             <div className="contact-list-x">
-              <Contact></Contact>
+              
+              {this.state.contacts.map((val) => {
+                console.log("MAPED" + val.contactId + " " + val.senderId + " " + val.receiverId);
+                return <ContactWithData
+                  setReceiverId={this.setReceiverId}
+                  key={val.contactId}
+                  contactId={val.contactId}
+                  SenderId={val.senderId}
+                  ReceiverId={val.receiverId}
+                  CurrentUserId={this.state.CurrentUserId}
+                ></ContactWithData>;
+              })}
+
+         
             </div>
             <button className="add-contact-btn">Add Contact</button>
             <button className="join-server-btn">Join Server</button>
@@ -214,15 +301,18 @@ class Home extends Component {
             </video>
             <div style={{ display: "flex", flexDirection: "column" }}>
               {this.state.messages.map((val) => (
-      <MessageWithData
-        key={val.id}
-        CurrentUserId={val.CurrentUserId}
-        Date={val.Date}
-        textcontent={val.textcontent}
-        ReceiverId={val.ReceiverId}
-        SenderId={val.SenderId}
-      ></MessageWithData>
-    ))}
+                <MessageWithData
+                  key={val.messageId}
+                  MessageId={val.messageId}
+                  CurrentUserId={this.state.CurrentUserId}
+                  Date={val.timeSent}
+                  textcontent={val.messageText}
+                  ReceiverId={val.receiverId}
+                  SenderId={val.senderId}
+                  SenderName={val.senderName}
+                  SenderAvatar={val.senderAvatar}
+                ></MessageWithData>
+              ))}
             </div>
 
             {/*<button*/}

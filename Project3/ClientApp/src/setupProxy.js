@@ -9,7 +9,8 @@ const context = [
     "/NexusChat",
     "/auth",
     "/user",
-    "/message"
+    "/message",
+    "/contacts"
 ];
 
 const onError = (err, req, resp, target) => {

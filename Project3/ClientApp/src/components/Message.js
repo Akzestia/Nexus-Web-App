@@ -9,79 +9,51 @@ export class Message extends Component {
       textcontent: props.textcontent,
       // BlobUrlContent: props.BlobUrlContent,
       // ImgGifTypes: ["image/png", "image/jpeg", "image/gif"],
-      SenderName: '',
       Date: props.Date,
       SenderId: props.SenderId,
+      CurrentUserId: props.CurrentUserId,
+      SenderName: props.SenderName,
+      SenderAvatar: props.SenderAvatar,
       ReceiverId: props.ReceiverId,
-      ImageSrc: '',
+      MessageId: props.MessageId,
     };
   }
 
   componentDidMount = async () => {
-    const options2 = {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-    const response = await fetch(
-      `auth/GetUserById/${this.state.SenderId}`,
-      options2
-    );
 
-      await response.json().then((response) => {
-          document.querySelectorAll('.img-avatar-x-sender').forEach((e) => e.src = "data:image/png;base64," + response.userAvatar);
-          this.setState({ SenderName: response.userName });
-          this.setState({ ImageSrc: response.userAvatar });
-          console.log("HDGYIWGFYIWG EYFUGWYFG(W GF&(WG&(F GW&(FG " + response.userAvatar);
-    });
+      if(this.state.CurrentUserId != this.state.ReceiverId){
+        document.getElementById("m-x-s" + this.state.MessageId).classList.add("msg-x-main-container-receiver");
+      }
+      else{
+        document.getElementById("m-x-s" + this.state.MessageId).classList.add("msg-x-main-container-sender");
+      }
 
-    
-
-    // console.log(data.userName);
-    // console.log(data.userAvatar);
-    
-
-   
-
-      this.state.ReceiverId != this.state.SenderId
-        ? document
-            .getElementById("m-x-s")
-            .classList.add("msg-x-main-container-receiver")
-        : document
-            .getElementById("m-x-s")
-            .classList.remove("msg-x-main-container-sender");
-    this.state.ReceiverId == this.state.SenderId
-      ? document
-          .getElementById("m-x-s")
-          .classList.remove("msg-x-main-container-receiver")
-      : document
-          .getElementById("m-x-s")
-          .classList.add("msg-x-main-container-sender");
+    //   this.state.CurrentUserId != this.state.ReceiverId
+    //     ? document
+    //         .getElementById("m-x-s")
+    //         .classList.add("msg-x-main-container-receiver")
+    //     : document
+    //         .getElementById("m-x-s")
+    //         .classList.remove("msg-x-main-container-sender");
+    // this.state.CurrentUserId == this.state.ReceiverId
+    //   ? document
+    //       .getElementById("m-x-s")
+    //       .classList.remove("msg-x-main-container-receiver")
+    //   : document
+    //       .getElementById("m-x-s")
+    //       .classList.add("msg-x-main-container-sender");
 
   
   };
-
-  getBuffer(fileData) {
-    return function (resolve) {
-      var reader = new FileReader();
-      reader.readAsArrayBuffer(fileData);
-      reader.onload = function () {
-        var arrayBuffer = reader.result;
-        var bytes = new Uint8Array(arrayBuffer);
-        resolve(bytes);
-      };
-    };
-  }
 
   render() {
     return (
       <>
         <div style={{ display: "flex", flexDirection: "row" }}>
-          <div id="m-x-s">
+          <div id={"m-x-s" + this.state.MessageId}>
             <div className="message-text-section-x">
               <img id="avatar-border-img"
-                src="https://scarletnexusstorage.blob.core.windows.net/images/Avatar.png"
+                src={"data:image/png;base64," + this.state.SenderAvatar}
                 className="img-avatar-x-sender"
               
               ></img>
@@ -89,6 +61,7 @@ export class Message extends Component {
               <p>
                 {this.state.textcontent}
               </p>
+              {/* <p><img src={"data:image/png;base64," + this.state.BlobContent}></img></p> */}
               <div className="date-content-section-x">{this.state.Date}</div>
             </div>
             <div className="blob-content-section-x"></div>
@@ -100,13 +73,17 @@ export class Message extends Component {
 }
 
 export function MessageWithData(props) {
+
   return (
     <Message
+      MessageId={props.MessageId}
       CurrentUserId={props.CurrentUserId}
-      textcontent={props.textcontent}
       Date={props.Date}
-      SenderId={props.SenderId}
+      textcontent={props.textcontent}
       ReceiverId={props.ReceiverId}
+      SenderId={props.SenderId}
+      SenderName={props.SenderName}
+      SenderAvatar={props.SenderAvatar}
     ></Message>
   );
 }

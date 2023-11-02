@@ -17,14 +17,17 @@ namespace Project3.Hubs
         }
 
 
-        public async Task BroadcastMessage(string message, int senderId){
+        public async Task BroadcastMessage(string message, int senderId, int receiverId){
             string email = Context.GetHttpContext().User.Claims.ToList()[0].Value;
 
-            Console.WriteLine("CCCCCCC 1 " + senderId);
+            User? u = _context.Users.ToList().FirstOrDefault(x => x.UserId == senderId);
 
-            User? u = _context.Users.ToList().FirstOrDefault(x => x.UserEmail != email);
+            Message m = new Message(senderId, receiverId, message, u.UserAvatar, DateTime.Now.ToShortTimeString(), u.UserName, u.UserAvatar);
 
-            await Clients.All.SendAsync("broadcastMessage", senderId, message);    
+            await _context.Messages.AddAsync(m);
+            await _context.SaveChangesAsync();
+
+            await Clients.All.SendAsync("broadcastMessage", senderId, receiverId, message);    
         }
 
           

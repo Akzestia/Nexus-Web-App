@@ -1,6 +1,8 @@
 
 
-
+p{
+    font-family: sans-serif;
+}
 .contact-x-main-container {
     display: flex;
     flex-direction: row;

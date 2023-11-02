@@ -22,7 +22,6 @@ namespace Project3.Controllers
         {
             try
             {
-
                 User u = new User(xu.UserName, xu.UserPassword, xu.UserEmail, AuthController.temp_Avatar);
 
                 await _context.Users.AddAsync(u);
